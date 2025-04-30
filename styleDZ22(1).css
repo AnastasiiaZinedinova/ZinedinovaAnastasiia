@@ -1,0 +1,65 @@
+p {font-size: 20px;
+	color: black;}
+u, h3 {color: darkviolet;}
+i {color: deeppink;}
+h1 {color: mediumvioletred;}
+.information {background: rgb(255, 182, 193);
+border: 2px solid #888;
+outline: 5px solid #444;
+outline-color: mediumvioletred;}
+.photos {background: rgb(255, 182, 193);
+display: flex;
+justify-content: center;
+align-items: center;
+height: 50vh;
+border: 2px solid #888;
+outline: 5px solid #444;
+outline-color: mediumvioletred;}
+.wisheswrap {display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background: rgb(255, 182, 193);
+border: 2px solid #888;
+outline: 5px solid #444;
+outline-color: palevioletred;}
+.wishesform{
+	background: white;
+	padding: 20px;
+	border-radius: 20px;
+	box-shadow: 0 5px 15px rgb(199, 21, 133);
+	width: 300px;
+	text-align: center;}
+.wishesform label {align-items: left;
+	height: 0vh;
+    display: flex;}
+.wishesform textarea {width: 100%;
+	padding: 10px 2px;
+	margin: 10px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;}
+.wishesform input {
+	width: 100%;
+	padding: 10px 2px;
+	margin: 10px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;}
+.wishesform button {
+	background-color: #2575fc;
+	color: white;
+	border: violet;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;}
+.wishesform button:hover {
+	background-color: blueviolet;}
+#albums {
+font-size: 25px;
+background-color: pink;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 50vh;
+border: 2px solid #888;
+outline: 5px solid #444;
+outline-color: palevioletred;}
