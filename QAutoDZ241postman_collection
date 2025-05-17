@@ -1,0 +1,517 @@
+{
+	"info": {
+		"_postman_id": "66c31f71-438b-485b-8e57-63dbf4f58af0",
+		"name": "QAutoDZ24.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44690726"
+	},
+	"item": [
+		{
+			"name": "Create a new user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"Password\", pm.variables.replaceIn(\"{{$randomPassword}}\"));// Create a global change\r",
+							"pm.globals.set(\"Email\", pm.variables.replaceIn(\"{{$randomEmail}}\"));// Create changing of email and save"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify if currency after registration - USD\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.currency).to.eql(\"usd\");\r",
+							"}); \r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"{{$randomFirstName}}\",\r\n  \"lastName\": \"{{$randomLastName}}\",\r\n  \"email\": \"{{Email}}\",\r\n  \"password\": \"{{Password}}\",\r\n  \"repeatPassword\": \"{{Password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/auth/signup",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify if units of distance after registration - km\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.distanceUnits).to.eql(\"km\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{Email}}\",\r\n  \"password\": \"{{Password}}\",\r\n  \"remember\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/auth/signin",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user`s profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify if country after registration - Ukraine\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.country).to.eql(\"Ukraine\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify if dateBirth after registration - 2002-02-17T15:21:05.000Z\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.dateBirth).to.eql(\"2002-02-17T15:21:05.000Z\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"photo\": \"user-1621352948859.jpg\",\r\n  \"name\": \"Anastasiia\",\r\n  \"lastName\": \"Zinedinova\",\r\n  \"dateBirth\": \"2002-02-17T15:21:05.000Z\",\r\n  \"country\": \"Ukraine\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/users/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user`s settings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify if distanceUnits after editing - ml\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.distanceUnits).to.eql(\"ml\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"currency\": \"usd\",\r\n  \"distanceUnits\": \"ml\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/users/settings",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var ResponsJson = pm.response.json()\r",
+							"console.log(ResponsJson)\r",
+							"pm.globals.set(\"CarId\", ResponsJson.data.id)\r",
+							"console.log(\"CarId set to:\", ResponsJson.data.id)\r",
+							"\r",
+							"pm.test(\"Verify if carModelId after adding a car - 4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.carModelId).to.eql(4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify if carBrandId after adding a car - 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.carBrandId).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"carBrandId\": 1,\r\n  \"carModelId\": 4,\r\n  \"mileage\": 122\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/cars",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit existing car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify if mileage after changing - 1682\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.mileage).to.eql(1682);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"carBrandId\": 1,\r\n  \"carModelId\": 4,\r\n  \"mileage\": 1682\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/cars/{{CarId}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"{{CarId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an expenses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify if liters after adding an expenses - 11\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.liters).to.eql(11);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify if totalCost after adding an expenses - 11\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.totalCost).to.eql(11);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"carId\": {{CarId}},\r\n  \"reportedAt\": \"{{$isoTimestamp}}\",\r\n  \"mileage\": 341,\r\n  \"liters\": 11,\r\n  \"totalCost\": 11,\r\n  \"forceMileage\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/expenses",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"expenses"
+					]
+				},
+				"description": "This endpoint allows you to create a new expense by making an HTTP POST request to {{URL}}/api/expenses. The request should include a JSON payload in the raw request body type with the \"carId\" parameter.\n\n### Request Body\n\n- `carId`: (object) The ID of the car for which the expense is being added.\n    \n\n### Response\n\nThe endpoint returns a 400 status code with a JSON response body including the following fields:\n\n- `status`: (string) The status of the response.\n    \n- `message`: (string) A message providing details about the error."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a car",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/cars/{{CarId}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"{{CarId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/users",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
